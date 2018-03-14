@@ -1,0 +1,65 @@
+CSCB58 Project File: Winter 2018
+
+Project Title: Bit Music Composer
+
+Project Description:
+Create a system that plays an editable tune. It allows you to change what notes are played as
+the sound loops. There will be four speakers that each plays a different note in a pattern. Using
+the keys on the DE2 board to access a corresponding speaker, you can change the pattern of
+notes using the switches. Each switch will correspond to one beat, resulting in a loop of 18
+beats for the 18 switches.
+
+Video URL:
+
+Code URL (please upload a copy of this file to your repository at the end of the project as well, it
+will serve as a useful resource for future development):
+
+
+Proposal
+--------
+What do you plan to have completed by the end of the first lab session?:
+Be able to play notes on multiple speakers based on input from the DE2 board. Start creating a
+continuous loop.
+
+What do you plan to have completed by the end of the second lab session?:
+Finish generating a continuous loop of notes. Get one speaker to play a beat corresponding to
+the switches on the DE2 board.
+
+What do you plan to have completed by the end of the third lab session?:
+Get all speakers to play at the same time. Get the DE2 board to switch between which speaker
+is receiving input.
+
+What is your backup plan if things don’t work out as planned?
+If we can’t get multiple speakers working in lab 3, we will at least have one speaker that loops
+through a pattern. In which case we will try to change it into multiple notes instead of just one on
+one speaker.
+
+What hardware will you need beyond the DE2 board
+We will need 4 (or however many Brian will give us) speakers and any wires (or additional
+hardware) needed to connect the speakers to the DE2 board.
+Motivations
+-----------
+How does this project relate to the material covered in CSCB58?:
+We will explore the use of Finite State machines to cycle through different speakers and the
+note patterns. We will look at using clock cycles to control the sounds being produced and to
+cycle through the note patterns.
+
+Why is this project interesting/cool (for CSCB58 students, and for non CSCB58 students?):
+For CSCB58 students, this project is interesting because by using the things we learned in this
+course, we are creating music using computer hardware without aid of a music software.
+For non CSCB58 students, this project is cool because it’s like a mini mixtable that allows users
+to creatively make short tunes.
+
+Why did you personally choose this project?:
+We were inspired by the Oskar Fischinger google doodle, which allows user to compose a sort
+beat by choosing a pattern of multiple notes.
+https://www.google.com/doodles/oskar-fischingers-117th-birthday
+
+Attributions
+------------
+Provide a complete list of any external resources your project used (attributions should also be
+included in your
+code).
+
+Updates
+-------
