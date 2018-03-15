@@ -1,44 +1,39 @@
-module bitComposer(SW, KEY, CLOCK_50, LEDR);
+ module bitComposer(SW, KEY, CLOCK_50, GPIO, LEDR, LEDG);
 	input CLOCK_50;
-	input [2:0] SW;
+	input [17:0] SW;
 	input [3:0] KEY;
-	output [0:0] LEDR;
+	output [7:0] GPIO;
+	output [18:0] LEDR;
+	output [2:0] LEDG;
+	
+	wire sound;
 	
 	shift shiftOne(CLOCK_50, SW[2:0], KEY[0], KEY[1], LEDR[0]);
+	play speaker(CLOCK_50, KEY[2], GPIO[0]);
+	
 endmodule
 
-module play();
-	/* REFERNCED CODE */
+module noteHandler(clk, pattern, select, load, note1, note2, note3, note4);
+	input clk, load;
+	input [15:0] pattern;
+	input [1:0] select;
+	output [15:0] note1, note2, note3, note4;
 	
-	// Note Table (Hz)
-	always@(posedge clk)
+	reg [15:0] pat1, pat2, pat3, pat4;
+	
+	always @(posedge load)
 	begin
-		case (note[2:0])
-			3'b001: clkdivider <= 50000000/880; 	// A
-			3'b010: clkdivider <= 50000000/986;     // B
-			3'b011: clkdivider <= 50000000/1046;    // C
-			3'b100: clkdivider <= 50000000/1147;    // D
-			3'b101: clkdivider <= 50000000/1318;    // E
-			3'b110: clkdivider <= 50000000/1396;    // F
-			3'b111: clkdivider <= 50000000/1566;    // G
-		endcase
+	case(select)
+		2'b00: pat1 <= pattern;
+		2'b01: pat2 <= pattern;
+		2'b10: pat3 <= pattern;
+		2'b11: pat4 <= pattern;
+	endcase
 	end
-
-
-	reg [31:0] counter;
-	always @(posedge clk)
-		begin
-			if(counter==0)
-				counter <= clkdivider-1;
-			else
-				counter <= counter-1;
-			freq_out <= clkdivider[18:0];
-		end
-
-	reg speaker;
-	always @(posedge clk)
-		if((counter==0) && note)
-			speaker <= ~speaker;
-	/* REFERNCE CODE END */
+	
+	assign note1 = pat1;
+	assign note2 = pat2;
+	assign note3 = pat3;
+	assign note4 = pat4;
 	
 endmodule
