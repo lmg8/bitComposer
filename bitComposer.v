@@ -8,8 +8,10 @@
 	
 	wire sound;
 	
-	shift shiftOne(CLOCK_50, SW[2:0], KEY[0], KEY[1], LEDR[0]);
-	play speaker(CLOCK_50, KEY[2], GPIO[0]);
+	shift shiftOne(CLOCK_50, SW[2:0], KEY[0], KEY[1], sound);
+	play speaker(CLOCK_50, sound, GPIO[0]);
+	
+	assign LEDR[0] = sound;
 	
 endmodule
 
