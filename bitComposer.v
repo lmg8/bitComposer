@@ -4,7 +4,7 @@ module BitComposer(SW, KEY, CLOCK_50, GPIO,LEDR, LEDG);
 	input [3:0] KEY;
 	output [1:0] GPIO;
 	output [17:0] LEDR;
-	output [3:0] LEDG;
+	output [5:0] LEDG;
 	wire [15:0] enable;
 	wire reset;
 	wire [15:0] qOut;
@@ -12,9 +12,10 @@ module BitComposer(SW, KEY, CLOCK_50, GPIO,LEDR, LEDG);
 	wire new_clk, play;
 	wire [3:0] currentBeat;
 	
-	//assign reset = 1'b0;
-	//assign load = KEY[1];
-	
+	assign reset = KEY[0];
+	assign load = KEY[1];
+	assign LEDG[0] = reset;
+	assign LEDG[1] = load
 	genvar i;
 
 	generate
@@ -41,135 +42,14 @@ module BitComposer(SW, KEY, CLOCK_50, GPIO,LEDR, LEDG);
 	flipflop f14 (CLOCK_50, enable[14], reset, qOut[14]);
 	flipflop f15 (CLOCK_50, enable[15], reset, qOut[15]);
 
-	clock_divider cd(CLOCK_50, new_clk);
+	// calculates how fast clock goes
+	rate_divider cd(CLOCK_50, new_clk);
 	assign LEDR[17] = new_clk;
+	// counts through each beat based on new_clk
 	counter c(new_clk, reset, currentBeat);
-	assign LEDG[0] = currentBeat[0];
-	assign LEDG[1] = currentBeat[1];
-	assign LEDG[2] = currentBeat[2];
-	assign LEDG[3] = currentBeat[3];
+	assign LEDG[5:2] = currentBeat;
+	// chooses which beat to play
 	beatSelect bs(currentBeat, qOut, play, LEDR[15:0]); 
-
-	SingleNotePlayer p(CLOCK_50, GPIO[0], sound);
-	
-endmodule
-
-module beatSelect(currentBeat, qOut, play, led);
-	input [3:0]currentBeat;
-	input [15:0] qOut;
-	output reg play;
-	output reg [15:0] led;
-	always@(*)
-	begin
-		case (currentBeat)
-			4'b0000: begin play = qOut[0];
-			led[0] = play;
-			end
-			4'b0001: begin play = qOut[1];
-			led[1] = play;
-			end
-			4'b0010: begin play = qOut[2];
-			led[2] = play;
-			end
-			4'b0011: begin play = qOut[3];
-			led[3] = play;
-			end
-			4'b0100: begin play = qOut[4];
-			led[4] = play;
-			end
-			4'b0101: begin play = qOut[5];
-			led[5] = play;
-			end
-			4'b0110: begin play = qOut[6];
-			led[6] = play;
-			end
-			4'b0111: begin play = qOut[7];
-			led[7] = play;
-			end
-			4'b1000: begin play = qOut[8];
-			led[8] = play;
-			end
-			4'b1001: begin play = qOut[9];
-			led[9] = play;
-			end
-			4'b1010: begin play = qOut[10];
-			led[10] = play;
-			end
-			4'b1011: begin play = qOut[11];
-			led[11] = play;
-			end
-			4'b1100: begin play = qOut[12];
-			led[12] = play;
-			end
-			4'b1101:	begin play = qOut[13];
-			led[13] = play;
-			end
-			4'b1110: begin play = qOut[14];
-			led[14] = play;
-			end
-			4'b1111: begin play = qOut[15];
-			led[15] = play;
-			end
-		endcase
-	end
-endmodule
-
-module flipflop(clock, d, reset_n, q);
-	input clock; 
-	input d;
-	input reset_n;
-	output reg q;
-
-	always @(posedge clock)
-	begin
-		if (reset_n == 1'b1)
-			q <= 0;
-		else
-			q <= d;
-	end
-endmodule
-
-module clock_divider(clk, new_clk);
-	input clk;
-	output new_clk;
-	reg tmp_clk = 1'b0;
-	reg [27:0] count = 28'd19999999;
-	
-	always @(posedge clk)
-		begin
-			if (count == 28'd0) begin
-				tmp_clk <= ~tmp_clk;
-				count <= 28'd19999999;
-				end
-			else 
-				count <= count - 1'b1;
-		end
-	assign new_clk = tmp_clk;
-endmodule
-
-module counter(clock, clear_b, q);
-	input clock;
-	input clear_b;
-	output reg [3:0] q;
-
-	always @(posedge clock)
-	begin 
-		if(clear_b == 1'b1)
-			q <= 4'b0000;
-		else
-			q <= q + 1'b1;
-	end
-endmodule
-
-module SingleNotePlayer(clk, speaker, sound);
-    input clk, sound;
-	 output speaker;
-    reg [31:0] clkdivider = 50000000/880; 
-
-
-    reg [31:0] counter;
-    always @(posedge clk) if(counter==0) counter <= clkdivider-1; else counter <= counter-1;
-
-    reg speaker;
-    always @(posedge clk) if((counter==0) && sound) speaker <= ~speaker;
+	// output currentBeat to speaker
+	playSpeaker p(CLOCK_50, GPIO[0], play);
 endmodule
