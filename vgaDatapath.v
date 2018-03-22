@@ -99,9 +99,9 @@ module vgaDatapath(clk, cFill, cOutline, xStart, yStart, xOut, yOut, cOut);
 	
 		if (plot) begin
 			fill = 1'b0;
-			x <= xStart
+			x <= xStart;
 			y <= yStart;
-			plot  1'b0;
+			plot = 1'b0;
 		end
 		
 		else if (~fill) begin
@@ -110,7 +110,7 @@ module vgaDatapath(clk, cFill, cOutline, xStart, yStart, xOut, yOut, cOut);
 			yMax = 2'b10;
 			x <= x + xAdd;
 			y <= y + yAdd;
-			cOut = cOutline ? 3'b100 : 3'b000
+			cOut = cOutline ? 3'b100 : 3'b000;
 			if (done) begin
 				fill = 1'b1;
 			end
@@ -186,7 +186,7 @@ module vgaControl(clk, pattern, beatCount, plot, cFill, cOutline, xOut, yOut);
 	reg [1:0] yCount;
 	wire yEnable;
 	
-	always @{posedge clk) begin
+	always @(posedge clk) begin
 		if (xCount == 4'b1111)
 			xCount <= 1'b0;
 			
