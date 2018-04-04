@@ -6,7 +6,7 @@ module speakerPlay(switch, key, currentSpeaker, clock, new_clk, note, gpio, ledR
 	input [31:0] note;
 	output gpio;
 	output [15:0] ledR;
-	output [5:0] ledG;
+	output [3:0] ledG;
 	wire [15:0] enable;
 	wire reset, play;
 	wire [15:0] qOut;
@@ -14,8 +14,6 @@ module speakerPlay(switch, key, currentSpeaker, clock, new_clk, note, gpio, ledR
 	
 	assign reset = ~key[0];
 	assign load = ~key[1] & currentSpeaker;
-	assign ledG[0] = reset;
-	assign ledG[1] = load;
 	
 	genvar i;
 	generate
@@ -44,7 +42,7 @@ module speakerPlay(switch, key, currentSpeaker, clock, new_clk, note, gpio, ledR
 	assign ledR = qOut;
 	// counts through each beat based on new_clk
 	counter c(new_clk, currentBeat);
-	assign ledG[5:2] = currentBeat;
+	assign ledG[3:0] = currentBeat;
 	// chooses which beat to play
 	beatSelect bs(currentBeat, qOut, play); 
 	// output currentBeat to speaker
