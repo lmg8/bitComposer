@@ -1,13 +1,13 @@
-module ledSelect(led1, led2, currentSpeaker, ledOut);
-	input [15:0] led1, led2;
-	input [1:0]currentSpeaker;
+module ledSelect(led1, led2, led3, led4, currentSpeaker, ledOut);
+	input [15:0] led1, led2, led2, led3, led4;
+	input [3:0] currentSpeaker;
 	output reg [15:0] ledOut;
 	always @(*) begin
 	case (currentSpeaker)
-			2'b01: begin ledOut = led1;
-			end
-			2'b10: begin ledOut = led2;
-			end
+			4'b0001: ledOut = led1;
+			4'b0010: ledOut = led2;
+			4'b0100: ledOut = led3;
+			4'b1000: ledOut = led4;
 	endcase
 	end
 endmodule
