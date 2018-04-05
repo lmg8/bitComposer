@@ -72,8 +72,8 @@ module BitComposer(SW, KEY, CLOCK_50, HEX7, GPIO, LEDR, LEDG, VGA_CLK, VGA_HS, V
 	
 	datapath d0(
 		.clk(CLOCK_50),
-		.resetN(resetn), 
-		.enable(1'b1),
+		.resetN(resetn),
+		.select(SW[17:16]),
 		.xIn(8'd20),
 		.yIn(7'd30),
 		.qOut1(ledR1),
