@@ -1,4 +1,4 @@
-module bitComposerTest(SW, KEY, CLOCK_50, HEX7, GPIO, LEDR, LEDG, VGA_CLK, VGA_HS, VGA_VS, VGA_BLANK_N, VGA_SYNC_N, VGA_R, VGA_G, VGA_B);
+module BitComposer(SW, KEY, CLOCK_50, HEX7, GPIO, LEDR, LEDG, VGA_CLK, VGA_HS, VGA_VS, VGA_BLANK_N, VGA_SYNC_N, VGA_R, VGA_G, VGA_B);
 	input CLOCK_50;
 	input [17:0] SW;
 	input [3:0] KEY;
