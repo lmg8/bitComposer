@@ -1,65 +1,65 @@
-CSCB58 Project File: Winter 2018
+﻿CSCB58 Project File: Winter 2018
 
+Project Details
+---------------
 Project Title: Bit Music Composer
 
 Project Description:
-Create a system that plays an editable tune. It allows you to change what notes are played as
-the sound loops. There will be four speakers that each plays a different note in a pattern. Using
-the keys on the DE2 board to access a corresponding speaker, you can change the pattern of
-notes using the switches. Each switch will correspond to one beat, resulting in a loop of 18
-beats for the 18 switches.
+Create a system that plays an editable tune. It allows you to change what notes are played as the sound loops. It is designed for four speakers that each plays a different note in a pattern. Using the keys on the DE2 board to access a corresponding speaker, you can change the pattern of notes using the switches. Each switch will correspond to one beat, resulting in a loop of 16 beats for 16 switches.
 
 Video URL:
 
-Code URL (please upload a copy of this file to your repository at the end of the project as well, it
-will serve as a useful resource for future development):
+Code URL (please upload a copy of this file to your repository at the end of the project as well, it will serve as a useful resource for future development):
+https://github.com/angelamz/bitComposer
 
 
 Proposal
 --------
+
 What do you plan to have completed by the end of the first lab session?:
-Be able to play notes on multiple speakers based on input from the DE2 board. Start creating a
-continuous loop.
+Be able to play notes on multiple speakers based on input from the DE2 board. Start creating a continuous loop.
 
 What do you plan to have completed by the end of the second lab session?:
-Finish generating a continuous loop of notes. Get one speaker to play a beat corresponding to
-the switches on the DE2 board.
+Finish generating a continuous loop of notes. Get one speaker to play a beat corresponding to the switches on the DE2 board.
 
 What do you plan to have completed by the end of the third lab session?:
-Get all speakers to play at the same time. Get the DE2 board to switch between which speaker
-is receiving input.
+Get all speakers to play at the same time. Get the DE2 board to switch between which speaker is receiving input.
 
 What is your backup plan if things don’t work out as planned?
-If we can’t get multiple speakers working in lab 3, we will at least have one speaker that loops
-through a pattern. In which case we will try to change it into multiple notes instead of just one on
-one speaker.
+If we can’t get multiple speakers working in lab 3, we will at least have one speaker that loops through a pattern. In which case we will try to change it into multiple notes instead of just one, on one speaker.
 
-What hardware will you need beyond the DE2 board
-We will need 4 (or however many Brian will give us) speakers and any wires (or additional
-hardware) needed to connect the speakers to the DE2 board.
+What hardware will you need beyond the DE2 board 
+We will need 4 (or however many Brian will give us) speakers, wires, resistors, and a breadboard.
+
+
 Motivations
 -----------
 How does this project relate to the material covered in CSCB58?:
-We will explore the use of Finite State machines to cycle through different speakers and the
-note patterns. We will look at using clock cycles to control the sounds being produced and to
-cycle through the note patterns.
+We will explore the use of counters and latches to cycle through different speakers and the note patterns. We will look at using clock cycles to control the sounds being produced and to cycle through the note patterns. We also used what we learned in out lab to use a VGA monitor to output a visual of notes being played.
 
 Why is this project interesting/cool (for CSCB58 students, and for non CSCB58 students?):
-For CSCB58 students, this project is interesting because by using the things we learned in this
-course, we are creating music using computer hardware without aid of a music software.
-For non CSCB58 students, this project is cool because it’s like a mini mixtable that allows users
-to creatively make short tunes.
+For CSCB58 students, this project is interesting because by using the things we learned in this course, we are creating music using computer hardware without aid of a music software.
+For non CSCB58 students, this project is cool because it’s like a mini mixtable that allows users to creatively make short tunes.  
+
 
 Why did you personally choose this project?:
-We were inspired by the Oskar Fischinger google doodle, which allows user to compose a sort
-beat by choosing a pattern of multiple notes.
-https://www.google.com/doodles/oskar-fischingers-117th-birthday
+We were inspired by the Oskar Fischinger google doodle, which allows user to compose a sort beat by choosing a pattern of multiple notes. 
+https://www.google.com/doodles/oskar-fischingers-117th-birthday 
 
 Attributions
 ------------
-Provide a complete list of any external resources your project used (attributions should also be
-included in your
-code).
+Provide a complete list of any external resources your project used (attributions should also be included in your
+code).  
+https://github.com/ItsMeWithTheFace/DE2Keyboard/blob/master/SingleNotePlayer.v
+https://www.eecs.umich.edu/courses/eecs270/270lab/270_docs/debounce.html
 
 Updates
 -------
+
+In the first lab, we only got one speaker to play. There were three available speakers during that lab. One didn’t have a ground connection so we weren’t able to use it. The other one had four inputs, one for power and ground. We didn’t know what to do with the other two connections so it didn’t work out. We got the speaker to play the morse code we did for lab four. We’re currently trying to allow the user to use the switches to play a beat using a shifter.  We’re also trying a different method by using SR latches and counters if the shifter doesn’t work out.
+
+In the second lab, we used the available hardware (speaker and buzzer) and got both to play at the same time. We figured out how to use the switches and keys to play a pattern for the speaker and another pattern for the buzzer simultaneously. We finished what we planned on doing from day one with two hardware instead of four. We are now currently doing something on top of what we planned: figuring out how to show the output on a VGA monitor. Also, we're going to add an option that allows the user to change the speed of the beat.
+
+In the third lab, we managed to add an option that allows the user to change the speed of the beat. We got what we planned to do from day one working. However, since we only have one working speaker, we could not do the four speakers like we planned. Based on our code, if we get four speakers on the final presentation, we should be able to add to our code and get four speakers to work. We also got part of the VGA display working. It shows the notes will be played, that is, which switches are on or off in a row of 16 squares, one row for one note. The monitor still needs to display which beat is currently being played.
+
+In our final lab we added hex display showing what note is selected and we completed the VGA monitor display. The monitor shows a row of 16 squares for each note. The square is blue if it is on and white if not. A yellow outline shows up around which beat is currently playing. Each row also has a letter showing what note it is playing. The letter is red if it is currently reading from the switches and white if it is not.
