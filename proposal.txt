@@ -7,8 +7,6 @@ Project Title: Bit Music Composer
 Project Description:
 Create a system that plays an editable tune. It allows you to change what notes are played as the sound loops. It is designed for four speakers that each plays a different note in a pattern. Using the keys on the DE2 board to access a corresponding speaker, you can change the pattern of notes using the switches. Each switch will correspond to one beat, resulting in a loop of 16 beats for 16 switches.
 
-Video URL:
-
 Code URL (please upload a copy of this file to your repository at the end of the project as well, it will serve as a useful resource for future development):
 https://github.com/angelamz/bitComposer
 
